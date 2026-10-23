@@ -1,0 +1,192 @@
+/* ═══════════════════════════════════════════════════════════
+   STICK GAME — EXPANSION PACK III
+   Navigation · Custom Match · Rematch · Surprise Me · Records
+   ═══════════════════════════════════════════════════════════ */
+
+#gameBox { position: relative; }
+
+/* ── Back / navigation buttons ── */
+.nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #e6e8ff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.nav-back:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 18px var(--accent-soft);
+}
+.nav-back.in-game {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+    z-index: 6;
+    padding: 5px 11px;
+    font-size: 0.68rem;
+    opacity: 0.7;
+}
+.nav-back.in-game:hover { opacity: 1; }
+
+/* ── "Surprise Me" button ── */
+.surprise-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 11px 16px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    background: linear-gradient(120deg, rgba(255, 215, 0, 0.12), rgba(224, 64, 160, 0.12));
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.surprise-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent3);
+    box-shadow: 0 0 24px var(--accent-soft);
+}
+.surprise-btn .sp-emoji { font-size: 1.2rem; animation: spSpin 3s linear infinite; }
+@keyframes spSpin { to { transform: rotate(360deg); } }
+
+/* ── Random opponent card ── */
+.opp-card.opp-random {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border-style: dashed;
+    background: linear-gradient(120deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+}
+.opp-card.opp-random .opp-avatar { font-size: 1.5rem; }
+.opp-card.opp-random .opp-name { color: #fff; }
+
+/* ── Custom match config ── */
+.custom-cfg {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 6px 0 16px;
+}
+.cfg-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e6e8ff;
+}
+.stepper { display: flex; align-items: center; gap: 10px; }
+.step-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+.step-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px var(--accent-soft); }
+.step-btn:active { transform: scale(0.9); }
+.step-val {
+    min-width: 34px;
+    text-align: center;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+}
+.seg { display: flex; gap: 6px; }
+.seg-btn {
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+.seg-btn.on {
+    color: #fff;
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    box-shadow: 0 0 16px var(--accent-soft);
+}
+
+/* ── Game-over action rows ── */
+.go-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 14px;
+}
+.go-actions .btn { margin: 0; }
+
+/* ── Opponent record (stats) ── */
+.opp-record {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 6px;
+}
+.rec-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.84rem;
+    animation: fadeUp 0.4s ease backwards;
+}
+.rec-name { font-weight: 800; color: var(--oc, #fff); display: flex; align-items: center; gap: 7px; }
+.rec-score { margin-left: auto; color: rgba(255, 255, 255, 0.6); font-size: 0.78rem; font-weight: 700; }
+.rec-crown { filter: drop-shadow(0 0 6px gold); }
+
+/* ── Menu quick-help card ── */
+.quick-help {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: left;
+}
+.quick-help b { color: #fff; }

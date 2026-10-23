@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cinematic.css">
+    <link rel="stylesheet" href="expanded.css">
+    <link rel="stylesheet" href="more.css">
+    <link rel="stylesheet" href="extra.css">
+    <link rel="stylesheet" href="ultimate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="sticks.js" defer></script>
+    <script src="cinematic.js" defer></script>
+    <script src="expanded.js" defer></script>
+    <script src="more.js" defer></script>
+    <script src="extra.js" defer></script>
+    <script src="ultimate.js" defer></script>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <canvas id="particles"></canvas>
+    <div class="weather" id="weather"></div>
+    <div class="fx-layer" id="fxLayer"></div>
+    <div class="combo-layer" id="comboLayer"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- Cinematic opening -->
+    <div class="cine" id="cine">
+        <div class="cine-montage" id="cineMontage"></div>
+        <canvas class="cine-fx" id="cineFx"></canvas>
+        <div class="cine-embers" id="cineEmbers"></div>
+        <div class="cine-beam b1"></div>
+        <div class="cine-beam b2"></div>
+        <div class="cine-bar top"></div>
+        <div class="cine-bar bottom"></div>
+        <div class="cine-scan"></div>
+        <div class="cine-grain"></div>
+        <div class="cine-vignette"></div>
+        <div class="cine-flash" id="cineFlash"></div>
+        <div class="cine-stage" id="cineStage">
+            <div class="cine-line" id="cineL1">In a world where every move matters</div>
+            <div class="cine-line" id="cineL2">21 sticks &middot; one victor &middot; zero mercy</div>
+            <div class="cine-line red" id="cineL3">The only rule: don&rsquo;t take the last stick</div>
+            <div class="cine-studio" id="cineStudio">
+                <div class="studio-name">I HAVE CREATED A GAME</div>
+                <div class="studio-rule"></div>
+                <div class="studio-sub">CREATED BY YOURS TRULY</div>
+            </div>
+            <div class="cine-credits" id="cineCredits">
+                <div class="cc-row"><span class="cc-role">Starring</span><span class="cc-name">YOU...The PLAYER</span></div>
+                <div class="cc-row"><span class="cc-role">The Game</span><span class="cc-name">A GAME WITH MULTIPLE POSSIBILITIES</span></div>
+                <div class="cc-row"><span class="cc-role">Skill Gap</span><span class="cc-name">COMPETITION</span></div>
+            </div>
+            <div class="cine-rating" id="cineRating">
+                <div class="rate-stamp">
+                    <span class="rate-letter">R</span>
+                    <span class="rate-copy">RUTHLESS STICK HANDLING<b>NO MERCY &middot; NO REFUNDS</b></span>
+                </div>
+            </div>
+            <div class="cine-title-wrap" id="cineTitleWrap">
+                <div class="cine-ring" id="cineRing"></div>
+                <div class="cine-ring r2" id="cineRing2"></div>
+                <div class="cine-flare"></div>
+                <div class="cine-title" id="cineTitle"></div>
+                <div class="cine-tagline">Can you avoid the last stick?</div>
+                <div class="cine-prod">A Production by ONE person</div>
+            </div>
+        </div>
+        <div class="cine-progress"><i id="cineProg"></i></div>
+        <div class="cine-hint" id="cineHint">Click anywhere for sound &middot; press any key to skip</div>
+        <button class="cine-sound" id="cineSoundBtn">🔊 Tap for sound</button>
+        <button class="cine-skip" id="cineSkip">Skip &#9656;</button>
+    </div>
+
+    <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">🔊</button>
+
+    <div class="toolbar">
+        <button class="tool-btn" id="settingsBtn" onclick="openSettings()" title="Customize">⚙️</button>
+        <button class="tool-btn" id="achBtn" onclick="openAch()" title="Achievements">🏅</button>
+        <button class="tool-btn" id="statsBtn" onclick="openStats()" title="Stats">📊</button>
+        <button class="tool-btn" id="emoteBtn" onclick="toggleEmotes()" title="Emotes (T)">📣</button>
+    </div>
+
+    <!-- Emote wheel -->
+    <div class="emote-wheel" id="emoteWheel"></div>
+
+    <!-- Round intro cinematic -->
+    <div class="round-cine" id="roundCine">
+        <div class="rc-bar top"></div>
+        <div class="rc-bar bottom"></div>
+        <div class="rc-scan"></div>
+        <div class="rc-content">
+            <div class="rc-kicker" id="rcKicker">MODE</div>
+            <div class="rc-title" id="rcTitle"></div>
+            <div class="rc-rule" id="rcRule"></div>
+            <div class="rc-desc" id="rcDesc"></div>
+        </div>
+        <div class="rc-flash" id="rcFlash"></div>
+    </div>
+
+    <!-- Countdown cinematic -->
+    <div class="countdown-cine" id="countdownCine">
+        <div class="cd-ring"></div>
+        <div class="cd-num" id="cdNum">3</div>
+        <div class="cd-label" id="cdLabel">GET READY</div>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-content">
+            <div class="stick-pile-loader">
+                <div class="loader-stick s1"></div>
+                <div class="loader-stick s2"></div>
+                <div class="loader-stick s3"></div>
+                <div class="loader-stick s4"></div>
+                <div class="loader-stick s5"></div>
+            </div>
+            <h1 class="loader-title">Stick Game</h1>
+            <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+            <p class="loader-text" id="loaderText">Preparing the battlefield...</p>
+        </div>
+    </div>
+
+    <div class="game-wrapper" id="gameWrapper">
+        <div class="eyebrow">A Stickworks Interactive Production</div>
+        <h1 class="title">Stick Game</h1>
+        <h2 class="subtitle">Can You Avoid the Last Stick?</h2>
+        <div class="container">
+            <div class="box glass" id="gameBox">
+                <p class="instructions">Take turns removing <strong>1</strong> or <strong>2</strong> sticks from the pile. The player forced to take the last stick <strong>loses</strong>!</p>
+                <button class="btn btn-glow pulse" onclick="openModeSelect()">Start Game</button>
+                <div class="start-extras">
+                    <button class="mini-link" onclick="openSettings()">⚙️ Customize</button>
+                    <button class="mini-link" onclick="openAch()">🏅 Achievements</button>
+                </div>
+            </div>
+        </div>
+        <div class="log glass" id="log"></div>
+        <div class="stats-line" id="statsLine"></div>
+    </div>
+
+    <div class="gameover-screen" id="gameoverScreen"></div>
+
+    <!-- Settings / Customize modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-card glass">
+            <button class="modal-close" onclick="closeSettings()">✕</button>
+            <div class="modal-kicker">Customize</div>
+            <h2 class="modal-title">Your Setup</h2>
+            <div id="settingsBody"></div>
+        </div>
+    </div>
+
+    <!-- Achievements modal -->
+    <div class="modal" id="achModal">
+        <div class="modal-card glass">
+            <button class="modal-close" onclick="closeAch()">✕</button>
+            <div class="modal-kicker">Trophy Room</div>
+            <h2 class="modal-title">Achievements</h2>
+            <div class="ach-progress" id="achProgress"></div>
+            <div class="ach-grid" id="achGrid"></div>
+        </div>
+    </div>
+
+    <!-- Stats modal -->
+    <div class="modal" id="statsModal">
+        <div class="modal-card glass">
+            <button class="modal-close" onclick="closeStats()">✕</button>
+            <div class="modal-kicker">Career</div>
+            <h2 class="modal-title">Statistics</h2>
+            <div id="statsBody"></div>
+        </div>
+    </div>
+</body>
+</html>
